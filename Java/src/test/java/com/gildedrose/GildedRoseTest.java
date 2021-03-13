@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest 
 {
-    /*
-        *test_ItemIsCorrect
-        TEST CASE: Makes sure item is what it is supposed to be (name, sellIn, quality)
-        UseCase: 
-        @parm - N/A
-    */
+
     @Test
     void test_ItemIsCorrect() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
@@ -25,12 +20,6 @@ class GildedRoseTest
         assertEquals(0, app.items[0].quality);
     }
 
-    /*
-        *test_ItemQualityAndSellInDecrease
-        TEST CASE: Makes sure item is quality is never negative, even after sellIn date is past 0
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     void test_ItemQualityAndSellInDecreases()
     {
@@ -44,12 +33,6 @@ class GildedRoseTest
         assertEquals(0, app.items[0].quality);
     }
 
-    /*
-        *test_ItemQualityNeverNegative
-        TEST CASE: Makes sure item is quality is never negative, even after sellIn date is past 0
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     void test_ItemQualityNeverNegative ()
     {
@@ -63,12 +46,6 @@ class GildedRoseTest
         assertEquals(0, app.items[0].quality);
     }
 
-    /*
-        *test_ItemQualityDegradesTwiceAsFast
-        TEST CASE: Makes sure item is quality is never negative, even after sellIn date is past 0
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     void test_ItemQualityDegradesTwiceAsFast ()
     {
@@ -83,13 +60,6 @@ class GildedRoseTest
     }
 
 
-
-    /*
-        *test_AgedBrieIncreaseQuality
-        TEST CASE: Makes sure Aged Brie increases in quality the older it gets
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     public void test_AgedBrieIncreaseQuality ()
     {
@@ -106,12 +76,6 @@ class GildedRoseTest
         assertEquals(4, app.items[0].quality);
     }
 
-    /*
-        *test_AgedBrieQualityNotOver50
-        TEST CASE: Makes sure Aged Brie increases in quality the older it gets
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     public void test_AgedBrieQualityNotOver50 ()
     {
@@ -127,12 +91,6 @@ class GildedRoseTest
         assertEquals(50, app.items[0].quality);
     }
 
-    /*
-        *test_AgedBrieQualityDoubles
-        TEST CASE: Makes sure Aged Brie doubles in quality after 0 sell in date
-        UseCase: 
-        @parm - N/A
-    */
     @Test
     public void test_AgedBrieQualityDoubles ()
     {
@@ -148,7 +106,6 @@ class GildedRoseTest
         assertEquals(4, app.items[0].quality);
     }
 
-    
     @Test
     public void test_BackstageQualityIncrease ()
     {
@@ -254,5 +211,4 @@ class GildedRoseTest
         assertEquals(-1, app.items[0].sellIn);
         assertEquals(6, app.items[0].quality);
     }
-
 }

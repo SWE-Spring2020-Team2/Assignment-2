@@ -2,105 +2,160 @@ package com.gildedrose;
 
 class GildedRose 
 {
-    //!Variables
     Item[] items;
 
 
-    /*
-        *FUNCTION NAME
-        - Use Case:
-        !input:
-
-        ?output:
-    */
     public GildedRose(Item[] items) {
         this.items = items;
     }
 
-    /*
-        *updateQuality
-        - Use Case: programtically updates the SellIn date and Quality of each items
-        !input:
 
-        ?output:
-    */
     public void updateQuality() 
     {
+        //Loop Through All Items in the Array to Check for All The Things
         for (int i = 0; i < items.length; i++) 
         {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) 
+            //
+            CheckItemQuality(i);
+
+            //
+            DegradeSellInDate(i);
+
+            //
+            HandleQuality(items[i]);
+
+            //Handle our Expired Items
+            HandleExpired (items[i]);
+
+        }
+        
+    }
+
+    private void CheckItemQuality(int i) 
+    {
+        //
+        if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) 
+        {
+            //
+            DegradeQuality (items[i], 1);
+        } 
+        else 
+        {
+            if (items[i].quality < 50) 
             {
-                if (items[i].quality > 0) 
-                {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) 
-                {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
+                //
+                IncreaseQuality(items[i], 1);
+
+                //
+                IncreaseStagePassQuality(i);
+            }
+        }
+    }
+
+
+    private void IncreaseStagePassQuality(int i) 
+    {
+        //Make sure its actually the Stage Pass
+        if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) 
+        {
+            //If Within 10 Days Date
+            if (items[i].sellIn < 11) 
+            {
                 if (items[i].quality < 50) 
                 {
-                    items[i].quality = items[i].quality + 1;
-
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) 
-                    {
-                        if (items[i].sellIn < 11) 
-                        {
-                            if (items[i].quality < 50) 
-                            {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) 
-                        {
-                            if (items[i].quality < 50) 
-                            {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
+                    IncreaseQuality(items[i], 1);
                 }
             }
 
-            //* Conjured Item Degradation
-            if (items[i].name.equals("Conjured Mana Cake"))
+            //If Within 5 Days Date
+            if (items[i].sellIn < 6) 
             {
-                if (items[i].sellIn > 0)
-                    items[i].quality = items[i].quality - 1;
-                else
-                    items[i].quality = items[i].quality - 2;
-
-            }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros"))
-            {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) 
-            {
-                if (!items[i].name.equals("Aged Brie")) 
+                if (items[i].quality < 50) 
                 {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) 
-                    {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) 
-                            {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) 
-                    {
-                        items[i].quality = items[i].quality + 1;
-                    }
+                    IncreaseQuality(items[i], 1);
                 }
             }
+        }
+    }
+
+    private void IncreaseQuality (Item item, int number)
+    {
+        item.quality = item.quality + number;
+    }
+
+    private void DegradeQuality (Item item, int number)
+    {
+        if (item.quality > 0) 
+        {
+            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) 
+            {
+                item.quality = item.quality - number;
+            }
+        }
+    }
+
+    private void DegradeSellInDate (int i) 
+    {
+        //For everything thats not Sulfuras, decrease SellIn Date
+        if (!items[i].name.equals("Sulfuras, Hand of Ragnaros"))
+        {
+            items[i].sellIn = items[i].sellIn - 1;
+        }
+    }
+
+    private void HandleQuality (Item item)
+    {
+        //*Conjured Mana Cake
+        if (item.name.equals("Conjured Mana Cake"))
+        {
+            //Checking for when to decrease quality
+            if (item.sellIn > 0)
+                DegradeQuality(item, 1);
+        }
+    }
+
+    private void HandleExpired (Item item)
+    {
+        //check to see if item is expired & quality not over 50
+        if (item.sellIn <= 0)
+        {
+            //*Aged Brie
+            if (item.name.equals("Aged Brie") && item.quality < 50)
+            {
+                IncreaseQuality(item, 1);    //AgedBrie Increases in Quality
+            }
+
+            //*Backstage Passes Set to 0
+            else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert"))
+            {
+                item.quality = 0;
+            }
+
+            //*Sulfuras
+            else if(item.name.equals("Sulfuras, Hand of Ragnaros"))
+            {
+                //functionally useless
+            }
+
+
+            //*Conjured Mana Cake
+            else if (item.name.equals("Conjured Mana Cake"))
+            {
+                //Checking for when to decrease quality
+                if (item.sellIn <= 0)
+                    DegradeQuality(item, 3);
+            
+            }
+
+            //* Everything Else
+            else
+            {
+                if (item.quality <= 0)
+                    item.quality = 0;
+                else
+                DegradeQuality(item, 1);
+            }
+                
         }
     }
 }
