@@ -69,7 +69,7 @@ Assignment 2 - Gilded Rose Refactoring Kata
 
 
 ## Mob Video
-* [Link Will Go Here]()
+* [Mob Youtube Video](https://youtu.be/2fPXXaP7ASY)
 
 ### Built With
 
