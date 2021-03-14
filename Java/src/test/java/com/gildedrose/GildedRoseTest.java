@@ -1,3 +1,11 @@
+/**
+* This codebase is Team 2's version of the Gilded Rose Refactoring Kata done 
+* as assignment 2 for SWE 6733 - Emerging Software Engineering Processes
+*
+* @author  SWE 6733 - Team 2
+* @version 1.1
+* @since   2021-03-14 
+*/
 package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +16,7 @@ class GildedRoseTest
 {
 
     @Test
-    void test_ItemIsCorrect() {
+    public void test_ItemIsCorrect() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
 
         GildedRose app = new GildedRose(items);
@@ -21,7 +29,7 @@ class GildedRoseTest
     }
 
     @Test
-    void test_ItemQualityAndSellInDecreases()
+    public void test_ItemQualityAndSellInDecreases()
     {
         Item[] items = new Item[] { new Item("foo", 1, 1) };
 
@@ -34,7 +42,7 @@ class GildedRoseTest
     }
 
     @Test
-    void test_ItemQualityNeverNegative ()
+    public void test_ItemQualityNeverNegative ()
     {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
 
@@ -47,7 +55,7 @@ class GildedRoseTest
     }
 
     @Test
-    void test_ItemQualityDegradesTwiceAsFast ()
+    public void test_ItemQualityDegradesTwiceAsFast ()
     {
         Item[] items = new Item[] { new Item("foo", 0, 10) };
 
@@ -58,7 +66,6 @@ class GildedRoseTest
         assertEquals(-1, app.items[0].sellIn);
         assertEquals(8, app.items[0].quality);
     }
-
 
     @Test
     public void test_AgedBrieIncreaseQuality ()
