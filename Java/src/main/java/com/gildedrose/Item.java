@@ -1,3 +1,4 @@
+//! This file was not changed from the base Kata per rules of Gilded Rose Kata Refactoring
 package com.gildedrose;
 
 public class Item {
