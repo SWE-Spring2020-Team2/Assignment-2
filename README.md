@@ -60,8 +60,12 @@
 
 Assignment 2 - Gilded Rose Refactoring Kata
 
-## Code Test Completion
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/FTJUwhi"  ><a href="//imgur.com/a/FTJUwhi">SWE 6733 Team 2 - Assignment 2 - Test Coverage Results</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>   
+## Test Code Results
+![Code Coverage](https://github.com/SWE-Spring2020-Team2/Assignment-2/blob/main/test-results.png?raw=true)
+
+
+## Code Coverage
+![Code Coverage](https://github.com/SWE-Spring2020-Team2/Assignment-2/blob/main/code-coverage.png?raw=true)
 
 
 ## Mob Video
